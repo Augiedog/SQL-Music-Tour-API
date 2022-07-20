@@ -4,14 +4,21 @@ const db = require('../models')
 const { Band } = db 
 const { Op } = require('sequelize')
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 79d7a133160c7dd4072405bedb1f1f6f8a9dbf9d
 // FIND ALL BANDS
 bands.get('/', async (req, res) => {
     try {
         const foundBands = await Band.findAll({
             order: [ [ 'available_start_time', 'ASC' ] ],
             where: {
+<<<<<<< HEAD
                 name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%`}
+=======
+                name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%` }
+>>>>>>> 79d7a133160c7dd4072405bedb1f1f6f8a9dbf9d
             }
         })
         res.status(200).json(foundBands)
@@ -77,6 +84,11 @@ bands.delete('/:id', async (req, res) => {
     }
 })
 
+<<<<<<< HEAD
 
 // EXPORT
 module.exports = bands
+=======
+// EXPORT
+module.exports = bands
+>>>>>>> 79d7a133160c7dd4072405bedb1f1f6f8a9dbf9d
