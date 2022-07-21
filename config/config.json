@@ -1,36 +1,21 @@
 {
   "development": {
-<<<<<<< HEAD
     "username": "postgres",
     "password": "admin",
-=======
-    "username": "yourusername",
-    "password": null,
->>>>>>> 79d7a133160c7dd4072405bedb1f1f6f8a9dbf9d
     "database": "music_tour",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-<<<<<<< HEAD
     "username": "postgres",
     "password": "admin",
-=======
-    "username": "yourusername",
-    "password": null,
->>>>>>> 79d7a133160c7dd4072405bedb1f1f6f8a9dbf9d
     "database": "music_tour_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-<<<<<<< HEAD
     "username": "postgres",
     "password": "admin",
-=======
-    "username": "yourusername",
-    "password": null,
->>>>>>> 79d7a133160c7dd4072405bedb1f1f6f8a9dbf9d
     "database": "music_tour_production",
     "host": "127.0.0.1",
     "dialect": "postgres"

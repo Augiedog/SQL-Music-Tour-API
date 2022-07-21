@@ -1,24 +1,16 @@
 // DEPENDENCIES
 const bands = require('express').Router()
 const db = require('../models')
-const { Band } = db 
+const { Band, MeetGreet, Event } = db 
 const { Op } = require('sequelize')
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 79d7a133160c7dd4072405bedb1f1f6f8a9dbf9d
 // FIND ALL BANDS
 bands.get('/', async (req, res) => {
     try {
         const foundBands = await Band.findAll({
             order: [ [ 'available_start_time', 'ASC' ] ],
             where: {
-<<<<<<< HEAD
-                name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%`}
-=======
                 name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%` }
->>>>>>> 79d7a133160c7dd4072405bedb1f1f6f8a9dbf9d
             }
         })
         res.status(200).json(foundBands)
@@ -28,11 +20,31 @@ bands.get('/', async (req, res) => {
 })
 
 // FIND A SPECIFIC BAND
-bands.get('/:id', async (req, res) => {
+bands.get('/:name', async (req, res) => {
     try {
         const foundBand = await Band.findOne({
-            where: { band_id: req.params.id }
-        })
+            where: { name: req.params.name },
+            include: [
+                {
+                    model: MeetGreet,
+                    as: "meet_greets"
+                },
+                {
+                    model: Event,
+                    as: "event",
+                    where: { name: { [Op.like]: `%${req.query.event ? req.query.event : ''}%` } }
+                },
+                {
+                    model: setTime,
+                    as: "set_times",
+                    include: {
+                        model: Event,
+                        as: "event",
+                        where: { name: { [Op.like]: `%${req.query.event ? req.query.event : ''}%` } }
+                    }
+                }]
+    })
+    
         res.status(200).json(foundBand)
     } catch (error) {
         res.status(500).json(error)
@@ -53,11 +65,11 @@ bands.post('/', async (req, res) => {
 })
 
 // UPDATE A BAND
-bands.put('/:id', async (req, res) => {
+bands.put('/:name', async (req, res) => {
     try {
         const updatedBands = await Band.update(req.body, {
             where: {
-                band_id: req.params.id
+                name: req.params.name
             }
         })
         res.status(200).json({
@@ -69,11 +81,11 @@ bands.put('/:id', async (req, res) => {
 })
 
 // DELETE A BAND
-bands.delete('/:id', async (req, res) => {
+bands.delete('/:name', async (req, res) => {
     try {
         const deletedBands = await Band.destroy({
             where: {
-                band_id: req.params.id
+                name: req.params.name
             }
         })
         res.status(200).json({
@@ -84,11 +96,5 @@ bands.delete('/:id', async (req, res) => {
     }
 })
 
-<<<<<<< HEAD
-
 // EXPORT
 module.exports = bands
-=======
-// EXPORT
-module.exports = bands
->>>>>>> 79d7a133160c7dd4072405bedb1f1f6f8a9dbf9d
